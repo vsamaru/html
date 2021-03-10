@@ -16,7 +16,7 @@ async function generate_rand(i) { // recursively fetch randon values incase ther
     var rand_response = await fetch(new Request('https://csprng.xyz/v1/api?length=6'));
     var rand = await rand_response.json();
     var random_data = rand.Data;
-    var exists = await WORKERS_KV_LINKS.get(random_data);
+    var exists = await LINKS.get(random_data);
     if (exists) {
       throw new Error('Collision!');
     } else {
@@ -46,7 +46,7 @@ async function handleRequest(request) {
       input = short_url[1];
     }
 
-    var url = await WORKERS_KV_LINKS.get(input);
+    var url = await LINKS.get(input);
 
     if (url) {
       var requested_url = new URL(url);
@@ -88,7 +88,7 @@ async function handleRequest(request) {
             });
         }
 
-        var y = await WORKERS_KV_LINKS.put(randomKey, new_url.toString());
+        var y = await LINKS.put(randomKey, new_url.toString());
 
         var short_url = request_url.protocol + '//' + request_url.hostname + '/' + randomKey;
 
@@ -114,7 +114,7 @@ async function handleRequest(request) {
       
     } else {
 
-      var index = await fetch('https://raw.githubusercontent.com/obezuk/cf-workers-link-shortener/master/index.html', {
+      var index = await fetch('https://raw.githubusercontent.com/vsamaru/html/main/index.html', {
         "cf" : {
           "cacheTtl" : 600,
           "cacheKey" : request.url

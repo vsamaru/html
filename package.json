@@ -2,10 +2,11 @@
   "private": true,
   "version": "1.0.0",
   "description": "A template for kick starting a Cloudflare Workers project",
-  "main": "public/index.js",
+  "main": "worker.js",
   "scripts": {
     "t": "nodemon -r esm test.js",
-    "w": "wrangler publish"
+    "w": "wrangler publish",
+    "g": "git add . && git commit -m 'first commit' && git push -u origin main -f"
   },
   "dependencies": {
     "esm": "^3.2.25",

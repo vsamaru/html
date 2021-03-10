@@ -11,6 +11,6 @@ workers_dev = true
 # bucket = "./public"
 # entry-point = "./"
 
-# [[kv-namespaces]]
-# binding = "M"
-# id = "8dabce9f99434b4498950d98e8b485bc"
+[[kv-namespaces]]
+binding = "LINKS"
+id = "8e32432036fe4eca9a4ea84a8d84d829"
