@@ -1,0 +1,16 @@
+name = "s"
+type = "webpack"
+account_id = "1c5f0bb50c92188dd028fa501cb54b88"
+workers_dev = true
+
+# [vars]
+# B=''
+# TOKEN="1392892828:AAFkhbvyfgDDOAd6BaGju2wC1B8PaGza6Pc"
+
+# [site]
+# bucket = "./public"
+# entry-point = "./"
+
+# [[kv-namespaces]]
+# binding = "M"
+# id = "8dabce9f99434b4498950d98e8b485bc"

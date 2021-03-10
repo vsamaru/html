@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "description": "A template for kick starting a Cloudflare Workers project",
+  "main": "public/index.js",
+  "scripts": {
+    "t": "nodemon -r esm test.js",
+    "w": "wrangler publish"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "firebase-firestore-lite": "^1.0.3",
+    "isomorphic-unfetch": "^3.1.0"
+  }
+}
