@@ -1,40 +1,60 @@
-<!doctype html>
+<html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stations</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+</head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<body>
+    <style>
+    html {
+        font-family: monospace;
+        background-image: radial-gradient(#ddd 1px, transparent 0), radial-gradient(#ddd 1px, transparent 0);
+        background-position: 0 0, 25px 25px;
+        justify-content: center;
+        background-size: 50px 50px;
+        font-size: 16px;
+    }
 
-    <title>Cloudflare Workers - Link Shortener</title>
-  </head>
-  <body>
-    <h1>???</h1>
-    <h2>Create a Link</h2>
-    <pre>$ curl https://l.obez.uk/?new=https://cloudflare.com</pre>
-    <h2>Source Code</h2>
-    <p>Source code is available on Github: <a href="https://github.com/obezuk/cf-workers-link-shortener">https://github.com/obezuk/cf-workers-link-shortener</a></p>
+    div {
+        font-family: monospace;
+    }
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <button onClick="window.location.href=window.location.href">Refresh Page</button>
-  </body>
+    code {
+        background-color: #78fee0;
+    }
+
+    pre {
+        background-color: #9aff55;
+    }
+    mark { 
+  background-color: yellow;
+  
+}
+    </style>
+    <p id="app">
+        <script>
+        firebase.initializeApp({
+            apiKey: "AIzaSyA-ywEymuQpZmUC-9DG6mIZ9kpAl8PwfJM",
+            authDomain: "pbl6an.firebaseapp.com",
+            projectId: "pbl6an"
+        });
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true })
+        db.collection("LiST")
+            .onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                    //change.doc.data()
+                    document.querySelector('#app').innerHTML = "<mark>" + change.doc.id + " -> " + change.type + "</mark>    <code>" + JSON.stringify(change.doc.data(), null, 4) + "</code><br>" + document.querySelector('#app').innerHTML
+                });
+            });
+        </script>
+</body>
+
 </html>
-
-<!-- 
-echo "# html" >> README.md
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/vsamaru/html.git
-git push -u origin main -f 
--->
-
-
-<!-- git commit -m "first commit" && git push -u origin main -f  -->
