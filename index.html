@@ -9,6 +9,7 @@
     <title>Stations</title>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.4.0/json2html.min.js"></script>
 </head>
 
 <body>
@@ -19,22 +20,30 @@
         background-position: 0 0, 25px 25px;
         justify-content: center;
         background-size: 50px 50px;
-        font-size: 16px;
+        font-size: 12px;
     }
 
     div {
         font-family: monospace;
     }
 
-    code {
-        background-color: #78fee0;
+    pre {
+        background-color: linen;
     }
 
-    pre {
+    code {
         background-color: #9aff55;
     }
     mark { 
-  background-color: yellow;
+  background-color: palegreen;
+  
+}
+    mark2 { 
+  background-color: skyblue;
+  
+}
+    mark1 { 
+  background-color: coral;
   
 }
     </style>
@@ -46,14 +55,43 @@
             projectId: "pbl6an"
         });
         const db = firebase.firestore();
-        db.settings({ timestampsInSnapshots: true })
+        /*
+       db.collection("LiST")//.doc("$2")
+    //db.collection("cities")//.where("state", "==", "CA")
+    .onSnapshot((querySnapshot) => {
+    
+        var cities = [];
+        querySnapshot.forEach((doc) => {
+        console.log(doc.data().img)
+            cities.push(doc.data().img);
+        });
+        console.log("Current cities in CA: ", cities.join(", "));
+    });
+    
         db.collection("LiST")
             .onSnapshot((snapshot) => {
                 snapshot.docChanges().forEach((change) => {
                     //change.doc.data()
                     document.querySelector('#app').innerHTML = "<mark>" + change.doc.id + " -> " + change.type + "</mark>    <code>" + JSON.stringify(change.doc.data(), null, 4) + "</code><br>" + document.querySelector('#app').innerHTML
                 });
-            });
+            })
+            */
+            var v = Date.now()
+            //alert(v)
+            db.collection("$")//.where("day", "<=", v)
+    .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+            document.querySelector('#app').innerHTML = "<mark>" + change.doc.id + " -> " + change.type + "</mark>    <pre>" + JSON.stringify(change.doc.data(), null, 4) + "</pre>" + document.querySelector('#app').innerHTML
+            }
+            if (change.type === "modified") {
+    document.querySelector('#app').innerHTML = "<mark2>" + change.doc.id + " -> " + change.type + "</mark2>    <pre>" + JSON.stringify(change.doc.data(), null, 4) + "</pre>" + document.querySelector('#app').innerHTML
+            }
+            if (change.type === "removed") {
+   document.querySelector('#app').innerHTML = "<mark1>" + change.doc.id + " -> " + change.type + "</mark1>    <pre>" + JSON.stringify(change.doc.data(), null, 4) + "</pre>" + document.querySelector('#app').innerHTML
+            }
+        });
+    });
         </script>
 </body>
 
